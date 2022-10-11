@@ -1,59 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" 
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    {% block styles %}
-    {% endblock %}
-    <title>Celtic Cuisine</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+  {% block styles %}
+  {% endblock %}
+  <title>Celtic Cuisine</title>
 </head>
-<header>
-  <!-- Top Navbar -->
-    <!-- Dropdown Structure -->
-  <ul id="dropdown1" class="dropdown-content">
-    <li><a href="">Brittany</a></li>
-    <li><a href="">Ireland</a></li>
-    <li><a href="">Wales</a></li>
-    <li class="divider"></li>
-    <li><a href="">All</a></li>
-  </ul>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="{{ url_for('home') }}" class="brand-logo">Celtic Cuisine</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <!-- Dropdown Trigger -->
-        <li><a class="dropdown-trigger" href="" data-target="dropdown1">Recipes v</a></li>
-        <li><a href="">Add Recipes</a></li>
-        <li><a href="">Log in</a></li>
-        <li><a href="">Register</a></li>
-      </ul>
-    </div>
-  </nav>
-  <!-- Mobile Sidenav -->
-  <ul class="sidenav" id="mobile-demo">
-    <li><h4 class="center-align light-blue-text text-darken-4">Celtic Cuisine</h4></li>
-    <li><a href="{{ url_for('home') }}">Home</a></li>
-    <li><a href="">Recipes</a></li>
-    <li><a href="">Add Recipes</a></li>
-    <li><a href="">Log in</a></li>
-    <li><a href="">Register</a></li>
-  </ul>
-</header>
+
 <body>
+  <header>
+    <!-- Top Navbar -->
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a href="">Brittany</a></li>
+      <li><a href="">Ireland</a></li>
+      <li><a href="">Wales</a></li>
+      <li class="divider"></li>
+      <li><a href="">All</a></li>
+    </ul>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="{{ url_for('home') }}" class="brand-logo">Celtic Cuisine</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <!-- Dropdown Trigger -->
+          <li><a class="dropdown-trigger" href="" data-target="dropdown1">Recipes v</a></li>
+          <li><a href="">Add Recipes</a></li>
+          <li><a href="">Log in</a></li>
+          <li><a href="">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Mobile Sidenav -->
+    <ul class="sidenav" id="mobile-demo">
+      <li>
+        <h4 class="center-align light-blue-text text-darken-4">Celtic Cuisine</h4>
+      </li>
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="">Recipes</a></li>
+      <li><a href="">Add Recipes</a></li>
+      <li><a href="">Log in</a></li>
+      <li><a href="">Register</a></li>
+    </ul>
+  </header>
+
+  <main class="container">
     {% block content %}
     {% endblock %}
+  </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    {% block scripts %}
-    {% endblock %}
+  <footer class="page-footer blue darken-3">
+    <div class="container">
+      <h4>Follow us</h4>
+      <p>ADD SOCIAL BUTTONS</p>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            For educational purposes only
+            <a class="white-text right" href="https://github.com/danielj314" target="_blank">&copy; BDJ Designs</a>
+        </div>
+    </div>
+  </footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% block scripts %}
+  {% endblock %}
 </body>
+
 </html>
