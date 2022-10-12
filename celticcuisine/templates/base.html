@@ -35,10 +35,14 @@
           <li><a href="{{ url_for('home') }}">Home</a></li>
           <!-- Dropdown Trigger -->
           <li><a class="dropdown-trigger" href="" data-target="dropdown1">Nations v</a></li>
+          {% if session.user %}
           <li><a href="{{ url_for('my_recipes', username=session['user']) }}">My Recipes</a></li>
           <li><a href="">Add Recipes</a></li>
+          <li><a href="{{ url_for('logout') }}">Log out</a></li>
+          {% else %}
           <li><a href="{{ url_for('login') }}">Log in</a></li>
           <li><a href="{{ url_for('register') }}">Register</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
@@ -49,25 +53,29 @@
       </li>
       <li><a href="{{ url_for('home') }}">Home</a></li>
       <li><a href="">Nations</a></li>
+      {% if session.user %}
       <li><a href="{{ url_for('my_recipes', username=session['user']) }}">My Recipes</a></li>
       <li><a href="">Add Recipes</a></li>
+      <li><a href="{{ url_for('logout') }}">Log out</a></li>
+      {% else %}
       <li><a href="{{ url_for('login') }}">Log in</a></li>
       <li><a href="{{ url_for('register') }}">Register</a></li>
+      {% endif %}
     </ul>
   </header>
 
   <section>
     <!-- flash messages -->
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="row flashes">
-                    <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
-                </div>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="row flashes">
+      <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
+    </div>
+    {% endfor %}
+    {% endif %}
     {% endwith %}
-</section>
+  </section>
 
   <main class="container">
     {% block content %}
@@ -80,10 +88,10 @@
       <p>ADD SOCIAL BUTTONS</p>
     </div>
     <div class="footer-copyright">
-        <div class="container">
-            For educational purposes only
-            <a class="white-text right" href="https://github.com/danielj314" target="_blank">&copy; BDJ Designs</a>
-        </div>
+      <div class="container">
+        For educational purposes only
+        <a class="white-text right" href="https://github.com/danielj314" target="_blank">&copy; BDJ Designs</a>
+      </div>
     </div>
   </footer>
 
