@@ -4,6 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from flask_migrate import Migrate
 if os.path.exists("env.py"):
     import env  # noqa
 
@@ -17,5 +18,6 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 
 db = SQLAlchemy(app)
 mongo = PyMongo(app)
+migrate = Migrate(app, db)
 
 from celticcuisine import routes  # noqa
