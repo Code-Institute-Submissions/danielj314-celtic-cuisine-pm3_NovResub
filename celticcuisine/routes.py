@@ -13,6 +13,21 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/nations")
+def nations():
+    return render_template("nations.html")
+
+
+@app.route("/add_nation", methods=["GET", "POST"])
+def add_nation():
+    if request.method == "POST":
+        category = Nations(category_name=request.form.get("category_name"))
+        db.session.add(category)
+        db.session.commit()
+        return redirect(url_for("nations"))
+    return render_template("add_nation.html")
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":

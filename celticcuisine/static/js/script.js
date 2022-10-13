@@ -1,6 +1,6 @@
     $(document).ready(function(){
         // Dropdown function in top nav
-        $(".dropdown-trigger").dropdown();
+        $(".dropdown-trigger").dropdown({ hover: true });
         // Sidenav initialization
-        $(".sidenav").sidenav({edge: "right"});
+        $(".sidenav").sidenav({ edge: "right" });
       });

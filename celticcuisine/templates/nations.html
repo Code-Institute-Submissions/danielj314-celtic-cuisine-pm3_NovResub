@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-    
-    <h1>Hello nations.html</h1>
 
-    <!-- card panel in materialize for displaying categories -->
+<h3 class="light-blue-text text-darken-4 center-align">Celtic Nations</h3>
+
+<div class="row">
+    <div class="col s12 center-align">
+        <a href="{{ url_for('add_nation') }}" class="btn-large light-blue darken-2">
+            Add Nation <i class="fas fa-plus-square right"></i>
+        </a>
+    </div>
+</div>
 
 {% endblock %}
