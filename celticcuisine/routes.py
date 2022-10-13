@@ -29,7 +29,6 @@ def add_nation():
     return render_template("add_nation.html")
 
 
-
 @app.route("/edit_nation/<int:category_id>", methods=["GET", "POST"])
 def edit_nation(category_id):
     category = Nations.query.get_or_404(category_id)
