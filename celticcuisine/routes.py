@@ -15,7 +15,8 @@ def home():
 
 @app.route("/nations")
 def nations():
-    return render_template("nations.html")
+    categories = list(Nations.query.order_by(Nations.category_name).all())
+    return render_template("nations.html", categories=categories)
 
 
 @app.route("/add_nation", methods=["GET", "POST"])
