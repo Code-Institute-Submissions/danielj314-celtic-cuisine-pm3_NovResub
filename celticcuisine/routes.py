@@ -40,6 +40,14 @@ def edit_nation(category_id):
     return render_template("edit_nation.html", category=category)
 
 
+@app.route("/delete_nation/<int:category_id>")
+def delete_nation(category_id):
+    category = Nations.query.get_or_404(category_id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for("nations"))
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
