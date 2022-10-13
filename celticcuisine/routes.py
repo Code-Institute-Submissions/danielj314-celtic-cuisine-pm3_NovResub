@@ -29,6 +29,17 @@ def add_nation():
     return render_template("add_nation.html")
 
 
+
+@app.route("/edit_nation/<int:category_id>", methods=["GET", "POST"])
+def edit_nation(category_id):
+    category = Nations.query.get_or_404(category_id)
+    if request.method == "POST":
+        category.category_name = request.form.get("category_name")
+        db.session.commit()
+        return redirect(url_for("nations"))
+    return render_template("edit_nation.html", category=category)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
