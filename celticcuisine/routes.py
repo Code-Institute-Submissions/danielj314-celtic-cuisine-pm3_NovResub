@@ -13,6 +13,28 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/add_recipe", methods=["GET", "POST"])
+def add_recipe():
+    if request.method == "POST":
+        recipe = {
+            "category_id": request.form.get("category_id"),
+            "recipe_name": request.form.get("recipe_name"),
+            "recipe_image": request.form.get("recipe_image"),
+            "recipe_description": request.form.get("recipe_description"),
+            # "created_by": session["user"],
+            "ingredients": request.form.getlist("ingredients"),
+            "method": request.form.get("method"),
+            "prep_time": request.form.get("prep_time"),
+            "servings": request.form.get("servings")
+        }
+        mongo.db.recipes.insert_one(recipe)
+        flash("Recipe Successfully Added")
+        return redirect(url_for("my_recipes"))
+
+    categories = list(Nations.query.order_by(Nations.category_name).all())
+    return render_template("add_recipe.html", categories=categories)
+
+
 @app.route("/nations")
 def nations():
     categories = list(Nations.query.order_by(Nations.category_name).all())

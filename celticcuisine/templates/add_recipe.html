@@ -1,18 +1,96 @@
 {% extends "base.html" %}
 {% block content %}
-    
-<h2 class="light-blue-text text-darken-4 center-align">Recipe Name - Full Recipe</h2>
 
-    {% for recipe in recipes %}
-        {{ recipe.category_id }}<br>
-        {{ recipe.recipe_name }}<br>
-        {{ recipe.recipe_image }}<br>
-        {{ recipe.recipe_description }}<br>
-        {{ recipe.created_by }}<br>
-        {{ recipe.ingredients }}<br>
-        {{ recipe.method }}<br>
-        {{ recipe.prep_time }}<br>
-        {{ recipe.servings }}<br>
-    {% endfor %}
+<h3 class="light-blue-text text-darken-4 center-align">Add Recipe</h3>
+
+<div class="row card-panel grey lighten-5">
+    <form class="col s12" method="POST" action="{{ url_for('add_recipe') }}">
+        <!-- recipe name -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-pencil alt prefix light-blue-text text-darken-4"></i>
+                <input id="recipe_name" name="recipe_name" minlength="3" maxlength="25" type="text" class="validate"
+                    required>
+                <label for="recipe_name">Recipe name</label>
+            </div>
+        </div>
+        <!-- recipe category -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-earth-europe prefix light-blue-text text-darken-4"></i>
+                <select id="category_id" name="category_id" class="validate" required>
+                    <option value="" disabled selected>Choose nation</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id}}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="category_id">Recipe origin:</label>
+            </div>
+        </div>
+        <!-- recipe image -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-camera prefix light-blue-text text-darken-4"></i>
+                <input id="recipe_image" name="recipe_image" minlength="2" maxlength="25"
+                    type="text" class="validate">
+                <label for="recipe_image">Recipe image url</label>
+            </div>
+        </div>
+        <!-- recipe description -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
+                <textarea id="recipe_description" name="recipe_description" minlength="5" maxlength="200"
+                    type="text" class="materialize-textarea validate" required></textarea>
+                <label for="recipe_description">Recipe Description</label>
+            </div>
+        </div>
+        <!-- ingredients -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fa fa-cart prefix light-blue-text text-darken-4"></i>
+                <input id="other_ingredient" name="other_ingredient" minlength="2" maxlength="500"
+                    type="text" class="validate" required>
+                <label for="other_ingredient">Ingredients</label>
+            </div>
+        </div>
+        <!-- method -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fa fa-list prefix light-blue-text text-darken-4"></i>
+                <textarea id="method" name="method" minlength="5"
+                    maxlength="700" class="materialize-textarea validate" required></textarea>
+                <label for="method">Method</label>
+            </div>
+        </div>
+        <!-- preperation time -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fa fa-timer prefix light-blue-text text-darken-4"></i>
+                <input id="prep_time" name="prep_time" minlength="2" maxlength="25"
+                    type="text" class="validate" required>
+                <label for="prep_time">Preperation Time</label>
+            </div>
+        </div>
+        <!-- servings -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-users prefix light-blue-text text-darken-4"></i>
+                <input id="servings" name="servings" minlength="1" maxlength="20"
+                    type="text" class="validate" required>
+                <label for="servings">Servings</label>
+            </div>
+        </div>
+        <!-- submit button -->
+        <div class="row">
+            <div class="col s12 center-align">
+                <button type="submit" class="btn-large light-blue darken-1">
+                    Add Recipe <i class="fas fa-plus-square right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
+
