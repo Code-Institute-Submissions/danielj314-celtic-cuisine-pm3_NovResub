@@ -15,24 +15,36 @@ def home():
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    if "user" not in session:
+        flash("You need to be logged in to add a task")
+        return redirect(url_for("get_tasks"))
+
     if request.method == "POST":
         recipe = {
             "category_id": request.form.get("category_id"),
             "recipe_name": request.form.get("recipe_name"),
             "recipe_image": request.form.get("recipe_image"),
             "recipe_description": request.form.get("recipe_description"),
-            # "created_by": session["user"],
             "ingredients": request.form.getlist("ingredients"),
             "method": request.form.get("method"),
             "prep_time": request.form.get("prep_time"),
-            "servings": request.form.get("servings")
+            "servings": request.form.get("servings"),
+            "created_by": session["user"]
+
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added")
-        return redirect(url_for("my_recipes"))
+        return redirect(url_for("home"))
 
     categories = list(Nations.query.order_by(Nations.category_name).all())
     return render_template("add_recipe.html", categories=categories)
+
+
+# Get Wales recipes only
+# @app.route("/wales_recipes")
+# def wales_recipes():
+#     recipes = list(mongo.db.Nations.find({"category_name": "Wales"}))
+#     return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/nations")

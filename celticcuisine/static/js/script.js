@@ -5,4 +5,6 @@
         $(".sidenav").sidenav({ edge: "right" });
         // select initialization
         $("select").formSelect();
+        //Tooltip function used in forms
+        $(".tooltipped").tooltip();
       });
