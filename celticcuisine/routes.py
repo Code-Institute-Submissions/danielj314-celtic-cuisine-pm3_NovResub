@@ -10,7 +10,8 @@ from celticcuisine.models import Nations, Users
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html")
+    categories = list(Nations.query.order_by(Nations.category_name).all())
+    return render_template("home.html", categories=categories)
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -40,17 +41,12 @@ def add_recipe():
     return render_template("add_recipe.html", categories=categories)
 
 
-# Get Wales recipes only
-# @app.route("/wales_recipes")
-# def wales_recipes():
-#     recipes = list(mongo.db.Nations.find({"category_name": "Wales"}))
-#     return render_template("recipes.html", recipes=recipes)
+@app.route("/recipes/<int:category_id>", methods=["GET"])
+def recipes(category_id):
+    category = Nations.query.get_or_404(category_id)
+    recipes = list(mongo.db.recipes.find({"category_id": str(category_id)}))
+    return render_template("recipes.html", category=category, recipes=recipes)
 
-
-@app.route("/nations")
-def nations():
-    categories = list(Nations.query.order_by(Nations.category_name).all())
-    return render_template("nations.html", categories=categories)
 
 
 @app.route("/add_nation", methods=["GET", "POST"])
@@ -59,7 +55,7 @@ def add_nation():
         category = Nations(category_name=request.form.get("category_name"))
         db.session.add(category)
         db.session.commit()
-        return redirect(url_for("nations"))
+        return redirect(url_for("home"))
     return render_template("add_nation.html")
 
 
@@ -69,7 +65,7 @@ def edit_nation(category_id):
     if request.method == "POST":
         category.category_name = request.form.get("category_name")
         db.session.commit()
-        return redirect(url_for("nations"))
+        return redirect(url_for("home"))
     return render_template("edit_nation.html", category=category)
 
 
@@ -78,7 +74,7 @@ def delete_nation(category_id):
     category = Nations.query.get_or_404(category_id)
     db.session.delete(category)
     db.session.commit()
-    return redirect(url_for("nations"))
+    return redirect(url_for("home"))
 
 
 @app.route("/register", methods=["GET", "POST"])
