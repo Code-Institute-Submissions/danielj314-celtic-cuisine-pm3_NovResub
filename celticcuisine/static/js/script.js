@@ -7,4 +7,6 @@
         $("select").formSelect();
         //Tooltip function used in forms
         $(".tooltipped").tooltip();
+        //Parallax function used on hero image
+        $('.parallax').parallax();
       });

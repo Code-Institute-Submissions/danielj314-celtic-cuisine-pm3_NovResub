@@ -1,13 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=EB+Garamond&display=swap');
+
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'EB Garamond', serif;
+    font-size: x-large;
+    background-color: #f5ece5;
 }
+
 
 main {
     flex: 1 0 auto;
 }
 
+.card{
+    background-color: #45523e;
+}
+
+
 .flashes h4 {
     line-height: 2;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+
+.nav-wrapper {
+    background-color: #45523e;
+}
+
+.page-footer {
+    background-color: #45523e;
+}
+
+
+.brand-logo {
+    margin-left: 20px;
+}
+
+
+.nav-list {
+    font-size: xx-large;
+}
+
+.padding {
+    height: 200px;
 }

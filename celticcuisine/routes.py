@@ -10,8 +10,22 @@ from celticcuisine.models import Nations, Users
 @app.route("/")
 @app.route("/home")
 def home():
+    """Finds all categories in the Nations collection 
+    in SQL Database.
+    """
     categories = list(Nations.query.order_by(Nations.category_name).all())
     return render_template("home.html", categories=categories)
+
+
+@app.route("/recipes/<int:category_id>", methods=["GET"])
+def recipes(category_id):
+    """Finds all recipes in the mongo db recipes collection
+    with the category id that correlates with the selected 
+    Nations category in the sql database
+    """
+    category = Nations.query.get_or_404(category_id)
+    recipes = list(mongo.db.recipes.find({"category_id": str(category_id)}))
+    return render_template("recipes.html", category=category, recipes=recipes)
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -39,14 +53,6 @@ def add_recipe():
 
     categories = list(Nations.query.order_by(Nations.category_name).all())
     return render_template("add_recipe.html", categories=categories)
-
-
-@app.route("/recipes/<int:category_id>", methods=["GET"])
-def recipes(category_id):
-    category = Nations.query.get_or_404(category_id)
-    recipes = list(mongo.db.recipes.find({"category_id": str(category_id)}))
-    return render_template("recipes.html", category=category, recipes=recipes)
-
 
 
 @app.route("/add_nation", methods=["GET", "POST"])

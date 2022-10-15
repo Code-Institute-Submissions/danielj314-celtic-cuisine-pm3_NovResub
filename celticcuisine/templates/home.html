@@ -1,35 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="light-blue-text text-darken-4 center-align">Celtic Nations</h3>
 
+<div class="parallax-container">
+    <div class="parallax"><img src="../static/images/hero.jpg"></div>
+</div>
+<div class="row container">
+    <h2 class="header center-align">Welcome | Croeso | Fáilte <br> Degemer mad | Failt ort | Dynnargh dhis </h2>
+    <p class="grey-text text-darken-3 lighten-3 center-align">
+        Welcome to Celtic Cuisine, a website dedicated to the sharing of traditional celtic recipes. <br>
+        Here you can discover recipes from each of the celtic nations and you can even add your own recipes to share
+        with the community!
+    </p>
+</div>
+
+
+
+
+
+
+<h3 class="center-align">The Celtic Nations</h3>
+{% if session.user == "admin" %}
 <div class="row">
     <div class="col s12 center-align">
-        <a href="{{ url_for('add_nation') }}" class="btn-large light-blue darken-2">
+        <a href="{{ url_for('add_nation') }}" class="btn-large green accent-4">
             Add Nation <i class="fas fa-plus-square right"></i>
         </a>
     </div>
 </div>
-
+{% endif %}
 
 <div class="row">
     {% for category in categories %}
     <div class="col s12 m6 l4">
-        <div class="card light-blue darken-4 center-align">
+        <div class="card center-align">
             <div class="card-content white-text">
                 <span class="card-title">{{ category.category_name }}</span>
             </div>
             <div class="card-action">
                 <a href="{{ url_for('recipes', category_id=category.id) }}" class="btn green accent-4">View Recipes</a>
             </div>
+            {% if session.user == "admin" %}
             <div class="card-action">
                 <a href="{{ url_for('edit_nation', category_id=category.id) }}" class="btn green accent-4">Edit</a>
                 <a href="{{ url_for('delete_nation', category_id=category.id) }}" class="btn red">Delete</a>
             </div>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
 </div>
-<!-- stop -->
-
+<div class="padding"></div>
 {% endblock %}
