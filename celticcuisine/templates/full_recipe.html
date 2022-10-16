@@ -1,16 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="light-blue-text text-darken-4 center-align">Recipes</h3>
+<h3 class="center-align title-margins">{{ recipe.recipe_name }} - Full Recipe</h3>
 
-<div class="row">
-    <div class="col s12 center-align">
-        <a href="{{ url_for('add_recipe') }}" class="btn-large light-blue darken-2">
-            Add Recipe <i class="fas fa-plus-square right"></i>
-        </a>
+<div class="row container">
+    <div class="card full-recipe-container">
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-image">
+                    {% if recipe.recipe_image %}
+                    <img class="image" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }} image">
+                    {% else %}
+                    <img class="image" src="../static/images/plate.jpg" alt="empty plate image">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="row">
+                    <span class="col white-text">Description:</span><br>
+                    <span class="col black-text">{{ recipe.recipe_description }}</span><br><br>
+                    <span class="col white-text s5">Prep time:</span>
+                    <span class="col black-text">{{ recipe.prep_time }}</span><br>
+                    <span class="col white-text s5">Servings:</span>
+                    <span class="col black-text">{{ recipe.servings }}</span><br>
+                    <span class="col white-text s5">Created by:</span>
+                    <span class="col black-text">{{ recipe.created_by|capitalize }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s3 background-merino">
+                <h5>ingredients</h5>
+                <div class="col">
+                    <ul>
+                        {% for ingredient in recipe.ingredients %}
+                            <li>
+                            {{ ingredient }}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                </div>
+            </div>
+            <div class="col s9">
+                <span class="col white-text">Cooking Instructions:</span><br>
+                <span class="col black-text">{{ recipe.method }}</span><br>
+                </div>
+        </div>
     </div>
 </div>
-
 
 {% for recipe in recipes %}
 {{ recipe.category_id }}<br>

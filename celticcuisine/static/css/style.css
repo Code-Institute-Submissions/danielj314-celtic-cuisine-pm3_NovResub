@@ -39,6 +39,9 @@ h6 {
     background-color: #ad5d50;
 }
 
+.background-merino {
+    background-color: #f5ece5;
+}
 
 .page-footer {
     background-color: #45523e;
@@ -55,7 +58,10 @@ h6 {
 
 .recipe-card {
     min-height: 600px;
+}
 
+.recipe-card-image {
+    height: 220px;
 }
 
 
@@ -70,19 +76,20 @@ h6 {
     margin-bottom: 70px;
 }
 
-.nav-list {
-    font-size: xx-large;
-}
-
-
 footer{
     margin-top: 100px;
+}
+
+.full-recipe-container {
+    padding: 20px;
 }
 
 .category-image
 .card-image {
     max-width: fit-content;
 }
+
+
 
 .hero-card {
     position: relative;
