@@ -44,8 +44,18 @@ h6 {
     background-color: #45523e;
 }
 
-.card{
+.card {
     background-color: #b0aca2;
+}
+
+.nation-card {
+    min-height: 500px;
+}
+
+
+.recipe-card {
+    min-height: 600px;
+
 }
 
 
@@ -69,6 +79,7 @@ footer{
     margin-top: 100px;
 }
 
+.category-image
 .card-image {
     max-width: fit-content;
 }

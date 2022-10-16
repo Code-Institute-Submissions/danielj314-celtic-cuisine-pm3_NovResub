@@ -28,6 +28,15 @@ def recipes(category_id):
     return render_template("recipes.html", category=category, recipes=recipes)
 
 
+@app.route("/full_recipe/<recipe_id>")
+def full_recipe(recipe_id):
+    """
+    View full recipe by searching for recipe._id in mongodb
+    """
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("full_recipe.html", recipe=recipe)
+
+
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if "user" not in session:
