@@ -37,6 +37,9 @@
             <div class="card-content white-text">
                 <span class="card-title">{{ category.category_name }}</span>
             </div>
+            <div class="card-content card-image">
+                <span class="image"><img src="../static/images/{{ category.id }}.png"></span>
+            </div>
             <div class="card-action">
                 <a href="{{ url_for('recipes', category_id=category.id) }}" class="btn green accent-4">View Recipes</a>
             </div>

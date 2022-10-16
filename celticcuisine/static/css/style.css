@@ -56,3 +56,7 @@ h6 {
 .padding {
     height: 200px;
 }
+
+.card-image {
+    max-width: fit-content;
+}
