@@ -15,10 +15,6 @@ main {
     flex: 1 0 auto;
 }
 
-.card{
-    background-color: #45523e;
-}
-
 
 .flashes h4 {
     line-height: 2;
@@ -34,29 +30,79 @@ h6 {
     font-family: 'Cinzel Decorative', cursive;
 }
 
-
-.nav-wrapper {
+/*                                                              Colours */
+.background-cabbage {
     background-color: #45523e;
 }
+
+.background-matrix {
+    background-color: #ad5d50;
+}
+
 
 .page-footer {
     background-color: #45523e;
 }
 
+.card{
+    background-color: #b0aca2;
+}
+
+
+/*                                                              Margins and padding */
 
 .brand-logo {
     margin-left: 20px;
 }
 
+.title-margins {
+    margin-top: 100px;
+    margin-bottom: 70px;
+}
 
 .nav-list {
     font-size: xx-large;
 }
 
-.padding {
-    height: 200px;
+
+footer{
+    margin-top: 100px;
 }
 
 .card-image {
     max-width: fit-content;
+}
+
+.hero-card {
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+    color: #f5ece5;
+    text-shadow: 2px 2px 2px black;
+    z-index: 99;
+}
+
+.parallax-container {
+    z-index: 1;
+
+}
+
+.btn {
+    z-index: 9999;
+
+}
+
+.social-links {
+    color: #f5ece5;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.footer-copyright {
+    margin-top: 80px;
 }

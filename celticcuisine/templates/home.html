@@ -3,10 +3,23 @@
 
 
 <div class="parallax-container">
-    <div class="parallax"><img src="../static/images/hero.jpg"></div>
+    <div class="parallax">
+        <img src="../static/images/hero.jpg">
+            <div class="card s12 m6 l2 hero-card">
+                <h2>Celtic Cuisine</h2>
+                <div class="card-action">
+                    {% if session.user %}
+                    <a href="{{ url_for('logout') }}" class="btn background-cabbage">Log out</a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="btn background-cabbage">Log in</a>
+                    <a href="{{ url_for('register') }}" class="btn background-matrix">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
 </div>
 <div class="row container">
-    <h2 class="header center-align">Welcome | Croeso | Fáilte <br> Degemer mad | Failt ort | Dynnargh dhis </h2>
+    <h3 class="header center-align title-margins">Welcome | Croeso | Fáilte <br> Degemer mad | Failt ort | Dynnargh dhis </h3>
     <p class="grey-text text-darken-3 lighten-3 center-align">
         Welcome to Celtic Cuisine, a website dedicated to the sharing of traditional celtic recipes. <br>
         Here you can discover recipes from each of the celtic nations and you can even add your own recipes to share
@@ -19,7 +32,7 @@
 
 
 
-<h3 class="center-align">The Celtic Nations</h3>
+<h3 class="center-align title-margins">The Celtic Nations</h3>
 {% if session.user == "admin" %}
 <div class="row">
     <div class="col s12 center-align">
@@ -30,18 +43,18 @@
 </div>
 {% endif %}
 
-<div class="row">
+<div class="row container">
     {% for category in categories %}
     <div class="col s12 m6 l4">
         <div class="card center-align">
             <div class="card-content white-text">
-                <span class="card-title">{{ category.category_name }}</span>
+                <span class="card-title"><h4>{{ category.category_name }}</h4></span>
             </div>
             <div class="card-content card-image">
                 <span class="image"><img src="../static/images/{{ category.id }}.png"></span>
             </div>
             <div class="card-action">
-                <a href="{{ url_for('recipes', category_id=category.id) }}" class="btn green accent-4">View Recipes</a>
+                <a href="{{ url_for('recipes', category_id=category.id) }}" class="btn background-cabbage">View Recipes</a>
             </div>
             {% if session.user == "admin" %}
             <div class="card-action">
@@ -53,5 +66,5 @@
     </div>
     {% endfor %}
 </div>
-<div class="padding"></div>
+<div><br></div>
 {% endblock %}
