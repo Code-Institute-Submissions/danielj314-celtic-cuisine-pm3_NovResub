@@ -73,7 +73,7 @@ def edit_recipe(recipe_id):
 
     if "user" not in session or session["user"] != recipe["created_by"]:
         flash("You can only edit your own recipes!")
-        return redirect(url_for("recipes"))
+        return redirect(url_for("home"))
 
     if request.method == "POST":
         submit = {
@@ -95,6 +95,25 @@ def edit_recipe(recipe_id):
     categories = list(Nations.query.order_by(Nations.category_name).all())
     return render_template("edit_recipe.html", recipe=recipe,
                            categories=categories)
+
+
+@app.route("/delete_recipe/<recipe_id>")
+def delete_recipe(recipe_id):
+    """Delete recipe feature
+    Only current user or admin can use this feature
+    Finds recipe in recipes collection in mongo db via current
+    recipe_id in url
+    """
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    if "user" not in session or session["user"] != recipe["created_by"]:
+        if session["user"] != "admin":
+            flash("You can only delete your own recipes!")
+            return redirect(url_for("home"))
+
+    mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
+    flash("Recipe Successfully Deleted")
+    return redirect(url_for("my_recipes", username=session["user"]))
 
 
 @app.route("/add_nation", methods=["GET", "POST"])
