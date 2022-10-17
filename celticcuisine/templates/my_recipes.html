@@ -1,23 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 
+<h3 class="center-align title-margins"> {{ username }}'s Recipes</h3>
 
 <div class="row">
-    <div class="col s12 m8 offset-m2">
-        <div class="card-panel">
-            <h3 class="center-align light-blue-text text-darken-4">
-                {{ username }}'s Recipes
-            </h3>
-        </div>
+    <div class="col s12 center-align">
+        <a href="{{ url_for('add_recipe') }}" class="btn-large background-cabbage">
+            Add Recipe <i class="fas fa-plus-square right"></i>
+        </a>
     </div>
 </div>
 
-<div class="row">
+<!-- message to display if no matching results found -->
+{% if recipes|length == 0 %}
+<p class="center-align">No results found</p>
+{% endif %}
+
+<div class="row container">
     {% for recipe in recipes %}
     <div class="col s12 m6 l4">
-        <div class="card light-blue darken-4 center-align">
+        <div class="card recipe-card center-align">
             <div class="card-content white-text">
-                <span class="card-title">{{ recipe.recipe_name }}</span>
+                <span class="card-title">
+                    <h4>{{ recipe.recipe_name }}</h4>
+                </span>
+                <span class="card-title">{{ recipe.recipe_description }}</span>
+            </div>
+            <div class="card-image">
+                {% if recipe.recipe_image %}
+                <img class="recipe-card-image" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }} image">
+                {% else %}
+                <img class="recipe-card-image" src="../static/images/plate.jpg" alt="empty plate image">
+                {% endif %}
+            </div>
+            <div class="card-content black-text left-align">
+                <span>Prep time: {{ recipe.prep_time }}</span><br>
+                <span>Servings: {{ recipe.servings }}</span><br>
+                <span>Created by: {{ recipe.created_by|capitalize }}</span>
+            </div>
+            <div class="card-action">
+                <a href="{{ url_for('full_recipe', recipe_id=recipe._id) }}" class="btn background-cabbage">
+                    View recipe
+                </a>
             </div>
         </div>
     </div>

@@ -17,10 +17,21 @@ def home():
     return render_template("home.html", categories=categories)
 
 
+@app.route("/my_recipes/<username>", methods=["GET", "POST"])
+def my_recipes(username):
+
+    if "user" not in session:
+        flash("You need to be logged in to view your recipes")
+        return redirect("home")
+
+    recipes = list(mongo.db.recipes.find({"created_by": str(username)}))
+    return render_template("my_recipes.html", username=session["user"], recipes=recipes)
+
+
 @app.route("/recipes/<int:category_id>", methods=["GET"])
 def recipes(category_id):
     """Finds all recipes in the mongo db recipes collection
-    with the category id that correlates with the selected 
+    with the category id that correlates with the selected
     Nations category in the sql database
     """
     category = Nations.query.get_or_404(category_id)
@@ -40,8 +51,8 @@ def full_recipe(recipe_id):
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if "user" not in session:
-        flash("You need to be logged in to add a task")
-        return redirect(url_for("get_tasks"))
+        flash("You need to be logged in to add a recipe")
+        return redirect(url_for("home"))
 
     if request.method == "POST":
         recipe = {
@@ -199,15 +210,6 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
-
-
-@app.route("/my_recipes/<username>", methods=["GET", "POST"])
-def my_recipes(username):
-
-    if "user" in session:
-        return render_template("my_recipes.html", username=session["user"])
-
-    return redirect(url_for("login"))
 
 
 @app.route("/logout")
