@@ -124,3 +124,7 @@ footer{
 .footer-copyright {
     margin-top: 80px;
 }
+
+.header-title {
+    font-family: 'Cinzel Decorative', cursive;
+}
