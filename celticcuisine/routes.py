@@ -49,7 +49,7 @@ def add_recipe():
             "recipe_name": request.form.get("recipe_name"),
             "recipe_image": request.form.get("recipe_image"),
             "recipe_description": request.form.get("recipe_description"),
-            "ingredients": request.form.getlist("ingredients"),
+            "ingredients": request.form.get("ingredients"),
             "method": request.form.get("method"),
             "prep_time": request.form.get("prep_time"),
             "servings": request.form.get("servings"),
@@ -62,6 +62,39 @@ def add_recipe():
 
     categories = list(Nations.query.order_by(Nations.category_name).all())
     return render_template("add_recipe.html", categories=categories)
+
+
+@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
+def edit_recipe(recipe_id):
+    """ Finds specific recipe based on current recipe_id in url
+    for editing in mongo db.
+    """
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    if "user" not in session or session["user"] != recipe["created_by"]:
+        flash("You can only edit your own recipes!")
+        return redirect(url_for("recipes"))
+
+    if request.method == "POST":
+        submit = {
+            "category_id": request.form.get("category_id"),
+            "recipe_name": request.form.get("recipe_name"),
+            "recipe_image": request.form.get("recipe_image"),
+            "recipe_description": request.form.get("recipe_description"),
+            "ingredients": request.form.get("ingredients"),
+            "method": request.form.get("method"),
+            "prep_time": request.form.get("prep_time"),
+            "servings": request.form.get("servings"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipes.update_one(
+            {"_id": ObjectId(recipe_id)}, {"$set": submit})
+        flash("Recipe Successfully Updated")
+        return redirect(url_for("my_recipes", username=session["user"]))
+
+    categories = list(Nations.query.order_by(Nations.category_name).all())
+    return render_template("edit_recipe.html", recipe=recipe,
+                           categories=categories)
 
 
 @app.route("/add_nation", methods=["GET", "POST"])
