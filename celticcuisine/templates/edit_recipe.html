@@ -2,104 +2,106 @@
 {% block content %}
 
 <h3 class="center-align title-margins">Edit Recipe</h3>
+
 <div class="container">
-<div class="row card-panel">
-    <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
-        <!-- recipe name -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-pencil alt prefix text-cabbage"></i>
-                <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" minlength="3" maxlength="25" type="text" class="validate"
-                    required>
-                <label for="recipe_name">Recipe name</label>
+    <div class="row card-panel">
+        <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+            <!-- recipe name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pencil alt prefix text-cabbage"></i>
+                    <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" minlength="3"
+                        maxlength="25" type="text" class="validate" required>
+                    <label for="recipe_name">Recipe name</label>
+                </div>
             </div>
-        </div>
-        <!-- nation category -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-earth-europe prefix text-cabbage"></i>
-                <select id="category_id" name="category_id" class="validate" required>
-                    <option value="" disabled selected>Choose nation</option>
-                    {% for category in categories %}
-                    {% if category.id == recipe.category_id | int %}
+            <!-- nation category -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-earth-europe prefix text-cabbage"></i>
+                    <select id="category_id" name="category_id" class="validate" required>
+                        <option value="" disabled selected>Choose nation</option>
+                        {% for category in categories %}
+                        {% if category.id == recipe.category_id | int %}
                         <option value="{{ category.id }}" selected>{{ category.category_name }}</option>
-                    {% else %}
+                        {% else %}
                         <option value="{{ category.id }}">{{ category.category_name }}</option>
-                    {% endif %}
-                {% endfor %}
-                </select>
-                <label for="category_id">Recipe from:</label>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="category_id">Recipe from:</label>
+                </div>
             </div>
-        </div>
-        <!-- recipe image -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-camera prefix text-cabbage"></i>
-                <input id="recipe_image" name="recipe_image" value="{{ recipe.recipe_image }}" minlength="2" maxlength="300"
-                    type="text" class="validate">
-                <label for="recipe_image">Recipe image *must be URL</label>
+            <!-- recipe image -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-camera prefix text-cabbage"></i>
+                    <input id="recipe_image" name="recipe_image" value="{{ recipe.recipe_image }}" minlength="2"
+                        maxlength="300" type="text" class="validate">
+                    <label for="recipe_image">Recipe image *must be URL</label>
+                </div>
             </div>
-        </div>
-        <!-- recipe description -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-align-left prefix text-cabbage"></i>
-                <textarea id="recipe_description" name="recipe_description" minlength="5" maxlength="200"
-                    type="text" class="materialize-textarea validate" required>
+            <!-- recipe description -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-left prefix text-cabbage"></i>
+                    <textarea id="recipe_description" name="recipe_description" minlength="5" maxlength="200"
+                        type="text" class="materialize-textarea validate" required>
                     {{- recipe.recipe_description -}}
                 </textarea>
-                <label for="recipe_description">Short description</label>
+                    <label for="recipe_description">Short description</label>
+                </div>
             </div>
-        </div>
-        <!-- ingredients -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-carrot prefix text-cabbage"></i>
-                <textarea id="ingredients" name="ingredients" minlength="5" maxlength="1500" class="materialize-textarea validate" required>
+            <!-- ingredients -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-carrot prefix text-cabbage"></i>
+                    <textarea id="ingredients" name="ingredients" minlength="5" maxlength="1500"
+                        class="materialize-textarea validate" required>
                 {{- recipe.ingredients -}}
                 </textarea>
-                <label for="ingredients">Ingredients *place each ingredient on a new line</label>
+                    <label for="ingredients">Ingredients *place each ingredient on a new line</label>
+                </div>
             </div>
-        </div>
-        <!-- method -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-list prefix text-cabbage"></i>
-                <textarea id="method" name="method" minlength="5"
-                    maxlength="1500" class="materialize-textarea validate" required>
+            <!-- method -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-list prefix text-cabbage"></i>
+                    <textarea id="method" name="method" minlength="5" maxlength="1500"
+                        class="materialize-textarea validate" required>
                 {{- recipe.method -}}
                 </textarea>
-                <label for="method">Method *place each step on a new line - the steps will be automatically numbered for you.</label>
+                    <label for="method">Method *place each step on a new line - the steps will be automatically numbered
+                        for you.</label>
+                </div>
             </div>
-        </div>
-        <!-- preperation time -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fa fa-clock prefix text-cabbage"></i>
-                <input id="prep_time" name="prep_time" value="{{ recipe.prep_time }}" minlength="2" maxlength="25"
-                    type="text" class="validate" required>
-                <label for="prep_time">Preperation Time - e.g. 1 hr 20 mins</label>
+            <!-- preperation time -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa fa-clock prefix text-cabbage"></i>
+                    <input id="prep_time" name="prep_time" value="{{ recipe.prep_time }}" minlength="2" maxlength="25"
+                        type="text" class="validate" required>
+                    <label for="prep_time">Preperation Time - e.g. 1 hr 20 mins</label>
+                </div>
             </div>
-        </div>
-        <!-- servings -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-users prefix text-cabbage"></i>
-                <input id="servings" name="servings" value="{{ recipe.servings }}" minlength="1" maxlength="20"
-                    type="text" class="validate" required>
-                <label for="servings">Servings - e.g. 3 people</label>
+            <!-- servings -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-users prefix text-cabbage"></i>
+                    <input id="servings" name="servings" value="{{ recipe.servings }}" minlength="1" maxlength="20"
+                        type="text" class="validate" required>
+                    <label for="servings">Servings - e.g. 3 people</label>
+                </div>
             </div>
-        </div>
-        <!-- submit button -->
-        <div class="row">
-            <div class="col s12 center-align">
-                <button type="submit" class="btn-large background-cabbage">
-                    Edit Recipe <i class="fas fa-plus-square right"></i>
-                </button>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button type="submit" class="btn-large background-cabbage">
+                        Edit Recipe <i class="fas fa-plus-square right"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 {% endblock %}
-

@@ -101,6 +101,9 @@ footer{
     max-width: fit-content;
 }
 
+.card-top {
+    min-height: 290px;
+}
 
 .hero-card {
     position: relative;
