@@ -87,7 +87,7 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    """ 
+    """
     Only the user who created the recipe may edit a recipe.
     Finds selected recipe based on current recipe_id in url
     for editing in MongoDB recipes collection.
@@ -181,7 +181,7 @@ def edit_nation(category_id):
 def delete_nation(category_id):
     """
     Only Admin may delete a nation category.
-    Deletes a nation category from Postgres db using category_id........................
+    Deletes a nation category from Postgres db using category_id
     """
     if session["user"] != "admin":
         flash("Only Admin can delete a nation category")
