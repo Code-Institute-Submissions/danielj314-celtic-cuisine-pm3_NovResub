@@ -43,12 +43,24 @@ h6 {
     background-color: #f5ece5;
 }
 
+.background-cloudy {
+    background-color: #b0aca2;
+}
+
 .page-footer {
     background-color: #45523e;
 }
 
 .card {
     background-color: #b0aca2;
+}
+
+.text-cabbage {
+    color: #45523e;
+}
+
+.text-matrix {
+    color: #ad5d50;
 }
 
 .nation-card {

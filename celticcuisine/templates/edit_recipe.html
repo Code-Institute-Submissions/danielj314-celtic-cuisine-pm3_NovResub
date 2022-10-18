@@ -2,13 +2,13 @@
 {% block content %}
 
 <h3 class="center-align title-margins">Edit Recipe</h3>
-
-<div class="row card-panel grey lighten-5">
+<div class="container">
+<div class="row card-panel">
     <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
         <!-- recipe name -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-pencil alt prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-pencil alt prefix text-cabbage"></i>
                 <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" minlength="3" maxlength="25" type="text" class="validate"
                     required>
                 <label for="recipe_name">Recipe name</label>
@@ -17,7 +17,7 @@
         <!-- nation category -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-earth-europe prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-earth-europe prefix text-cabbage"></i>
                 <select id="category_id" name="category_id" class="validate" required>
                     <option value="" disabled selected>Choose nation</option>
                     {% for category in categories %}
@@ -34,7 +34,7 @@
         <!-- recipe image -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-camera prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-camera prefix text-cabbage"></i>
                 <input id="recipe_image" name="recipe_image" value="{{ recipe.recipe_image }}" minlength="2" maxlength="300"
                     type="text" class="validate">
                 <label for="recipe_image">Recipe image *must be URL</label>
@@ -43,7 +43,7 @@
         <!-- recipe description -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-align-left prefix text-cabbage"></i>
                 <textarea id="recipe_description" name="recipe_description" minlength="5" maxlength="200"
                     type="text" class="materialize-textarea validate" required>
                     {{- recipe.recipe_description -}}
@@ -54,7 +54,7 @@
         <!-- ingredients -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fa fa-cart prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-carrot prefix text-cabbage"></i>
                 <textarea id="ingredients" name="ingredients" minlength="5" maxlength="1500" class="materialize-textarea validate" required>
                 {{- recipe.ingredients -}}
                 </textarea>
@@ -64,7 +64,7 @@
         <!-- method -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fa fa-list prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-list prefix text-cabbage"></i>
                 <textarea id="method" name="method" minlength="5"
                     maxlength="1500" class="materialize-textarea validate" required>
                 {{- recipe.method -}}
@@ -75,7 +75,7 @@
         <!-- preperation time -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fa fa-timer prefix light-blue-text text-darken-4"></i>
+                <i class="fa fa-clock prefix text-cabbage"></i>
                 <input id="prep_time" name="prep_time" value="{{ recipe.prep_time }}" minlength="2" maxlength="25"
                     type="text" class="validate" required>
                 <label for="prep_time">Preperation Time - e.g. 1 hr 20 mins</label>
@@ -84,7 +84,7 @@
         <!-- servings -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-users prefix light-blue-text text-darken-4"></i>
+                <i class="fas fa-users prefix text-cabbage"></i>
                 <input id="servings" name="servings" value="{{ recipe.servings }}" minlength="1" maxlength="20"
                     type="text" class="validate" required>
                 <label for="servings">Servings - e.g. 3 people</label>
@@ -93,13 +93,13 @@
         <!-- submit button -->
         <div class="row">
             <div class="col s12 center-align">
-                <button type="submit" class="btn-large light-blue darken-1">
+                <button type="submit" class="btn-large background-cabbage">
                     Edit Recipe <i class="fas fa-plus-square right"></i>
                 </button>
             </div>
         </div>
     </form>
 </div>
-
+</div>
 {% endblock %}
 
