@@ -10,8 +10,9 @@ from celticcuisine.models import Nations, Users
 @app.route("/")
 @app.route("/home")
 def home():
-    """Finds all categories in the Nations collection 
-    in SQL Database.
+    """
+    Finds all categories in the Nations collection
+    in Postgres Database.
     """
     categories = list(Nations.query.order_by(Nations.category_name).all())
     return render_template("home.html", categories=categories)
@@ -19,20 +20,25 @@ def home():
 
 @app.route("/my_recipes/<username>", methods=["GET", "POST"])
 def my_recipes(username):
-
+    """
+    Finds all recipes in MongoDB recipes collection
+    that were created by the user currently logged in to the site.
+    """
     if "user" not in session:
         flash("You need to be logged in to view your recipes")
         return redirect("home")
 
     recipes = list(mongo.db.recipes.find({"created_by": str(username)}))
-    return render_template("my_recipes.html", username=session["user"], recipes=recipes)
+    return render_template(
+        "my_recipes.html", username=session["user"], recipes=recipes)
 
 
 @app.route("/recipes/<int:category_id>", methods=["GET"])
 def recipes(category_id):
-    """Finds all recipes in the mongo db recipes collection
+    """
+    Finds all recipes in the MongoDB recipes collection
     with the category id that correlates with the selected
-    Nations category in the sql database
+    Nations category in the Postgres database.
     """
     category = Nations.query.get_or_404(category_id)
     recipes = list(mongo.db.recipes.find({"category_id": str(category_id)}))
@@ -42,7 +48,7 @@ def recipes(category_id):
 @app.route("/full_recipe/<recipe_id>")
 def full_recipe(recipe_id):
     """
-    View full recipe by searching for recipe._id in mongodb
+    View full recipe by searching for the relevant recipe._id in MongoDB.
     """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template("full_recipe.html", recipe=recipe)
@@ -50,6 +56,10 @@ def full_recipe(recipe_id):
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    """
+    Adds recipe to MongoDB recipes collection. Only logged in
+    user may access this page.
+    """
     if "user" not in session:
         flash("You need to be logged in to add a recipe")
         return redirect(url_for("home"))
@@ -77,8 +87,10 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    """ Finds specific recipe based on current recipe_id in url
-    for editing in mongo db.
+    """ 
+    Only the user who created the recipe may edit a recipe.
+    Finds selected recipe based on current recipe_id in url
+    for editing in MongoDB recipes collection.
     """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
 
@@ -110,9 +122,9 @@ def edit_recipe(recipe_id):
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
-    """Delete recipe feature
-    Only current user or admin can use this feature
-    Finds recipe in recipes collection in mongo db via current
+    """
+    Allows the user who created the recipe or admin to delete a recipe
+    Finds recipe in recipes collection in MongoDB via current
     recipe_id in url
     """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -129,6 +141,14 @@ def delete_recipe(recipe_id):
 
 @app.route("/add_nation", methods=["GET", "POST"])
 def add_nation():
+    """
+    Only Admin may add a nation category.
+    Creates new nation category in Postgres db.
+    """
+    if session["user"] != "admin":
+        flash("Only Admin can add a nation category")
+        return redirect(url_for("home"))
+
     if request.method == "POST":
         category = Nations(category_name=request.form.get("category_name"))
         db.session.add(category)
@@ -139,6 +159,16 @@ def add_nation():
 
 @app.route("/edit_nation/<int:category_id>", methods=["GET", "POST"])
 def edit_nation(category_id):
+    """
+    Only Admin may edit a nation category.
+    Finds Nation using category_id in url.
+    Change the name of nation category in Postgres db.
+    """
+
+    if session["user"] != "admin":
+        flash("Only Admin can edit a nation category")
+        return redirect(url_for("home"))
+
     category = Nations.query.get_or_404(category_id)
     if request.method == "POST":
         category.category_name = request.form.get("category_name")
@@ -149,6 +179,14 @@ def edit_nation(category_id):
 
 @app.route("/delete_nation/<int:category_id>")
 def delete_nation(category_id):
+    """
+    Only Admin may delete a nation category.
+    Deletes a nation category from Postgres db using category_id........................
+    """
+    if session["user"] != "admin":
+        flash("Only Admin can delete a nation category")
+        return redirect(url_for("home"))
+
     category = Nations.query.get_or_404(category_id)
     db.session.delete(category)
     db.session.commit()
@@ -157,13 +195,24 @@ def delete_nation(category_id):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Adds a user to Users table in Postgres afte checking to confirm
+    user does not already exist and that password and confirm-password
+    fields match. Adds this user to a session cookie.
+    """
     if request.method == "POST":
-        # checks if username already exists in db
+        # checks if username already exists in Postgres - Users table
         existing_user = Users.query.filter(
             Users.user_name == request.form.get("username").lower()).all()
 
         if existing_user:
             flash("Username already exists")
+            return redirect(url_for("register"))
+
+        # check password field against confirm password field:
+        if request.form.get("password") != request.form.get(
+                "cpassword"):
+            flash("Passwords do not match. Please try again.")
             return redirect(url_for("register"))
 
         user = Users(
@@ -184,6 +233,10 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Searches Users db table for user, checks that hashed password is correct
+    Adds user to session.
+    """
     if request.method == "POST":
         # check if username exists in db
         existing_user = Users.query.filter(
