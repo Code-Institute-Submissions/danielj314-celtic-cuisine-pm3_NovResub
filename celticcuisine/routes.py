@@ -190,6 +190,7 @@ def delete_nation(category_id):
     category = Nations.query.get_or_404(category_id)
     db.session.delete(category)
     db.session.commit()
+    mongo.db.tasks.delete_many({"category_id": str(category_id)})
     return redirect(url_for("home"))
 
 
