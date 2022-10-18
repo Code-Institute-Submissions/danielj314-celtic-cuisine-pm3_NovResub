@@ -272,3 +272,44 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+# Error handling
+@app.errorhandler(400)
+def bad_request(error):
+    """
+    Returns 400.html error page if this error is found
+    """
+    return render_template('400.html'), 400
+
+
+@app.errorhandler(401)
+def unauthorized(error):
+    """
+    Returns 401.html error page if this error is found
+    """
+    return render_template('401.html'), 401
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """
+    Returns 404.html error page if this error is found
+    """
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+    """
+    Returns 405.html error page if this error is found
+    """
+    return render_template('405.html'), 405
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    """
+    Returns 500.html error page if this error is found
+    """
+    return render_template('500.html'), 500
