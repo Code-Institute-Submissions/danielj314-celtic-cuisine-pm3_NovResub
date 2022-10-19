@@ -28,6 +28,9 @@ h4,
 h5,
 h6 {
     font-family: 'Cinzel Decorative', cursive;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    
 }
 
 /*                                                              Colours */
@@ -69,7 +72,7 @@ h6 {
 
 
 .recipe-card {
-    min-height: 600px;
+    height: 750px;
 }
 
 .recipe-card-image {
@@ -149,8 +152,42 @@ footer{
 
 }
 
+/* .................................................Media Queries */
+
+
+/* .................................................base.html */
+
+@media only screen and (max-width: 992px) {
+    nav .brand-logo {
+        left: 0;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
 @media only screen and (max-width: 510px) {
     nav .brand-logo {
         font-size: 0.8em;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .footer-text {
+        text-align: right;
+    }
+}
+
+
+/* .................................................full_recipe.html */
+
+
+@media only screen and (max-width: 599px) {
+    .full-recipe-container > div> div {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .full-recipe-container{
+        margin-top: 75px;
     }
 }
