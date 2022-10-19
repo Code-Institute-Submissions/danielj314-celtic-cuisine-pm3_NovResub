@@ -9,4 +9,6 @@
         $(".tooltipped").tooltip();
         //Parallax function used on hero image
         $('.parallax').parallax();
+        //Modal function used on delete buttons
+        $('.modal').modal();
       });
