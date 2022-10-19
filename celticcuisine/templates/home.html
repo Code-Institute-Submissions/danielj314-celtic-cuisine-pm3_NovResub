@@ -51,12 +51,12 @@
     {% for category in categories %}
     <div class="col s12 m6 l4">
         <div class="card nation-card center-align">
-            <div class="card-content white-text">
+            <div class="card-content nation-title white-text">
                 <span class="card-title">
                     <h4>{{ category.category_name }}</h4>
                 </span>
             </div>
-            <div class="card-content card-image">
+            <div class="card-content nation-image card-image">
                 <span class="image"><img src="../static/images/{{- category.category_name.replace(' ', '') -}}.png"></span>
             </div>
             <div class="card-action">
