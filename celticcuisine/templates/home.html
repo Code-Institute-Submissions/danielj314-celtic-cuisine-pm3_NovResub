@@ -57,7 +57,7 @@
                 </span>
             </div>
             <div class="card-content card-image">
-                <span class="image"><img src="../static/images/{{ category.id }}.png"></span>
+                <span class="image"><img src="../static/images/{{- category.category_name.replace(' ', '') -}}.png"></span>
             </div>
             <div class="card-action">
                 <a href="{{ url_for('recipes', category_id=category.id) }}" class="btn background-cabbage">View
