@@ -9,7 +9,9 @@
             <h2>Celtic Cuisine</h2>
             <div class="card-action">
                 {% if session.user %}
-                <a href="{{ url_for('logout') }}" class="btn background-cabbage">Log out</a>
+                <a href="{{ url_for('add_recipe') }}" class="btn-large background-cabbage">
+                    Add recipe<i class="fas fa-plus-square right"></i>
+                </a>
                 {% else %}
                 <a href="{{ url_for('login') }}" class="btn background-cabbage">Log in</a>
                 <a href="{{ url_for('register') }}" class="btn background-matrix">Register</a>
@@ -30,10 +32,6 @@
         (Dont worry, we dont ask for your email address or any personal information when you register)
     </p>
 </div>
-
-
-
-
 
 
 <h3 class="center-align title-margins">The Celtic Nations</h3>
@@ -57,7 +55,8 @@
                 </span>
             </div>
             <div class="card-content nation-image card-image">
-                <span class="image"><img src="../static/images/{{- category.category_name.replace(' ', '') -}}.png"></span>
+                <span class="image"><img alt="Flag of {{ category.category_name }}"
+                        src="../static/images/{{- category.category_name.replace(' ', '') -}}.png"></span>
             </div>
             <div class="card-action">
                 <a href="{{ url_for('recipes', category_id=category.id) }}" class="btn background-cabbage">View
