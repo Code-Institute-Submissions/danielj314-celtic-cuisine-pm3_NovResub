@@ -169,10 +169,7 @@ footer{
     left: 0;
     -webkit-transform: translateX(0);
     transform: translateX(0);
-
     font-family: 'Cinzel Decorative', cursive;
-    align-content: left;
-
 }
 
 /* .............................................................Media Queries */

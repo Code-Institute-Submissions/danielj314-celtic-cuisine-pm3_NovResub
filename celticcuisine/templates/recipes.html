@@ -34,9 +34,9 @@
                 {% endif %}
             </div>
             <div class="card-content black-text left-align">
-                <span class="white-text">Prep time:</span><span></span> {{ recipe.prep_time }}</span><br>
-                <span class="white-text">Servings:</span><span></span> {{ recipe.servings }}</span><br>
-                <span class="white-text">Created by:</span><span></span> {{ recipe.created_by|capitalize }}</span>
+                <span class="white-text">Prep time: </span><span>{{ recipe.prep_time }}</span><br>
+                <span class="white-text">Servings: </span><span>{{ recipe.servings }}</span><br>
+                <span class="white-text">Created by: </span><span>{{ recipe.created_by|capitalize }}</span>
             </div>
             <div class="card-action">
                 <a href="{{ url_for('full_recipe', recipe_id=recipe._id) }}" class="btn background-cabbage">
