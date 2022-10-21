@@ -2,6 +2,11 @@
 
 [View the live project here.](https://celtic-cuisine.herokuapp.com/home)
 
+### Admin Credentials:
+
+* Username: admin
+* Password: Ctigi0305
+
 A website dedicated to sharing traditional recipes from the celtic nations: Celtic Cuisine.
 
 <h2 align="center"><img src="celticcuisine/documentation/responsivedesign.png"></h2>
